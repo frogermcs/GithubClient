@@ -22,7 +22,8 @@ import frogermcs.io.githubclient.utils.Validator;
         }
 )
 public interface AppComponent {
-    void inject(GithubClientApplication githubClientApplication);
+
+    //Dependencies below should be visible out of the component
 
     Application getApplication();
 

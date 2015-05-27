@@ -31,6 +31,7 @@ public class SplashActivity extends BaseActivity {
     @InjectView(R.id.btnShowRepositories)
     Button btnShowRepositories;
 
+    //These references will be satisfied by 'SplashActivityComponent.inject(this)' method
     @Inject
     SplashActivityPresenter presenter;
     @Inject
@@ -53,10 +54,11 @@ public class SplashActivity extends BaseActivity {
         });
     }
 
+    //Local dependencies graph is constructed here
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerSplashActivityComponent.builder()
-                .appComponent(appComponent)
+                .appComponent(appComponent)     //Takes appComponent explicitly (depends on it)
                 .splashActivityModule(new SplashActivityModule(this))
                 .build()
                 .inject(this);
