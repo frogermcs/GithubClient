@@ -3,7 +3,6 @@ package frogermcs.io.githubclient.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -21,24 +20,21 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 public class RepositoryDetailsActivity extends BaseActivity {
     private static final String ARG_REPOSITORY = "arg_repository";
+    @InjectView(R.id.tvRepoName)
+    TextView tvRepoName;
+    @InjectView(R.id.tvRepoDetails)
+    TextView tvRepoDetails;
+    @Inject
+    AnalyticsManager analyticsManager;
+    @Inject
+    RepositoryDetailsActivityPresenter presenter;
+    private Repository repository;
 
     public static void startWithRepository(Repository repository, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, RepositoryDetailsActivity.class);
         intent.putExtra(ARG_REPOSITORY, repository);
         startingActivity.startActivity(intent);
     }
-
-    @InjectView(R.id.tvRepoName)
-    TextView tvRepoName;
-    @InjectView(R.id.tvRepoDetails)
-    TextView tvRepoDetails;
-
-    @Inject
-    AnalyticsManager analyticsManager;
-    @Inject
-    RepositoryDetailsActivityPresenter presenter;
-
-    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

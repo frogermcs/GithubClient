@@ -1,7 +1,6 @@
 package frogermcs.io.githubclient.utils;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

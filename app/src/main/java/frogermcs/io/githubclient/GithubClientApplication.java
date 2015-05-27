@@ -3,7 +3,6 @@ package frogermcs.io.githubclient;
 import android.app.Application;
 import android.content.Context;
 
-import frogermcs.io.githubclient.data.api.GithubApiModule;
 import timber.log.Timber;
 
 /**
@@ -12,7 +11,6 @@ import timber.log.Timber;
 public class GithubClientApplication extends Application {
 
     private AppComponent appComponent;
-    private ApiComponent apiComponent;
 
     public static GithubClientApplication get(Context context) {
         return (GithubClientApplication) context.getApplicationContext();
@@ -28,15 +26,10 @@ public class GithubClientApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
-
-        apiComponent = appComponent.plus(new GithubApiModule());
     }
 
     public AppComponent getAppComponent() {
         return appComponent;
     }
 
-    public ApiComponent getApiComponent() {
-        return apiComponent;
-    }
 }

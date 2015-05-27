@@ -1,7 +1,6 @@
 package frogermcs.io.githubclient.ui.activity.component;
 
 import dagger.Component;
-import frogermcs.io.githubclient.ApiComponent;
 import frogermcs.io.githubclient.AppComponent;
 import frogermcs.io.githubclient.ui.activity.ActivityScope;
 import frogermcs.io.githubclient.ui.activity.SplashActivity;
@@ -14,7 +13,7 @@ import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
 @ActivityScope
 @Component(
         modules = SplashActivityModule.class,
-        dependencies = {ApiComponent.class}
+        dependencies = AppComponent.class
 )
 public interface SplashActivityComponent {
     SplashActivity inject(SplashActivity splashActivity);

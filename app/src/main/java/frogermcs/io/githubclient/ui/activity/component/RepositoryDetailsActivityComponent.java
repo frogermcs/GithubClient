@@ -17,6 +17,6 @@ import frogermcs.io.githubclient.ui.activity.presenter.RepositoryDetailsActivity
 )
 public interface RepositoryDetailsActivityComponent {
     RepositoryDetailsActivity inject(RepositoryDetailsActivity repositoryDetailsActivity);
-    
+
     RepositoryDetailsActivityPresenter presenter();
 }

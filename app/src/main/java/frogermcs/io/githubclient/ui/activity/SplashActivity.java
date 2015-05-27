@@ -12,7 +12,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import frogermcs.io.githubclient.AppComponent;
-import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.ui.activity.component.DaggerSplashActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
@@ -57,7 +56,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerSplashActivityComponent.builder()
-                .apiComponent(((GithubClientApplication) getApplication()).getApiComponent())
+                .appComponent(appComponent)
                 .splashActivityModule(new SplashActivityModule(this))
                 .build()
                 .inject(this);

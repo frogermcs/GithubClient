@@ -6,14 +6,12 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import frogermcs.io.githubclient.BuildConfig;
 import frogermcs.io.githubclient.R;
-import frogermcs.io.githubclient.data.ApiScope;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
@@ -24,7 +22,7 @@ import retrofit.client.OkClient;
 public class GithubApiModule {
 
     @Provides
-    @ApiScope
+    @Singleton
     OkHttpClient provideOkHttpClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setConnectTimeout(60 * 1000, TimeUnit.MILLISECONDS);
@@ -33,7 +31,7 @@ public class GithubApiModule {
     }
 
     @Provides
-    @ApiScope
+    @Singleton
     RestAdapter provideRestAdapter(Application application, OkHttpClient okHttpClient) {
         RestAdapter.Builder builder = new RestAdapter.Builder();
         builder.setClient(new OkClient(okHttpClient))
@@ -47,19 +45,19 @@ public class GithubApiModule {
     }
 
     @Provides
-    @ApiScope
+    @Singleton
     GithubApiService provideGithubApiService(RestAdapter restAdapter) {
         return restAdapter.create(GithubApiService.class);
     }
 
     @Provides
-    @ApiScope
+    @Singleton
     UserManager provideUserManager(GithubApiService githubApiService) {
         return new UserManager(githubApiService);
     }
 
     @Provides
-    @ApiScope
+    @Singleton
     RepositoriesManager provideRepositoriesManager(GithubApiService githubApiService) {
         return new RepositoriesManager(githubApiService);
     }

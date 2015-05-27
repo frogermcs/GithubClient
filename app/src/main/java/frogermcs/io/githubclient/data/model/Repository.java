@@ -7,10 +7,27 @@ import android.os.Parcelable;
  * Created by Miroslaw Stanek on 22.04.15.
  */
 public class Repository implements Parcelable {
+    public static final Parcelable.Creator<Repository> CREATOR = new Parcelable.Creator<Repository>() {
+        public Repository createFromParcel(Parcel source) {
+            return new Repository(source);
+        }
+
+        public Repository[] newArray(int size) {
+            return new Repository[size];
+        }
+    };
     public long id;
     public String name;
     public String url;
 
+    public Repository() {
+    }
+
+    private Repository(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.url = in.readString();
+    }
 
     @Override
     public int describeContents() {
@@ -23,23 +40,4 @@ public class Repository implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.url);
     }
-
-    public Repository() {
-    }
-
-    private Repository(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.url = in.readString();
-    }
-
-    public static final Parcelable.Creator<Repository> CREATOR = new Parcelable.Creator<Repository>() {
-        public Repository createFromParcel(Parcel source) {
-            return new Repository(source);
-        }
-
-        public Repository[] newArray(int size) {
-            return new Repository[size];
-        }
-    };
 }

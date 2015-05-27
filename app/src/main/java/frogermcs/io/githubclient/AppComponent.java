@@ -2,8 +2,6 @@ package frogermcs.io.githubclient;
 
 import android.app.Application;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -19,17 +17,20 @@ import frogermcs.io.githubclient.utils.Validator;
 @Singleton
 @Component(
         modules = {
-                AppModule.class
+                AppModule.class,
+                GithubApiModule.class
         }
 )
 public interface AppComponent {
     void inject(GithubClientApplication githubClientApplication);
-
-    ApiComponent plus(GithubApiModule apiModule);
 
     Application getApplication();
 
     AnalyticsManager getAnalyticsManager();
 
     Validator getValidator();
+
+    UserManager getUserManager();
+
+    RepositoriesManager getRepositoriesManager();
 }

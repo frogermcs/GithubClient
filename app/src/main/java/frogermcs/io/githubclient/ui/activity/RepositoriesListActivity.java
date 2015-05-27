@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 import frogermcs.io.githubclient.AppComponent;
-import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
 import frogermcs.io.githubclient.ui.activity.component.DaggerRepositoriesListActivityComponent;
@@ -30,24 +29,21 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 public class RepositoriesListActivity extends BaseActivity {
 
     private static final String ARG_USERNAME = "arg_username";
+    @InjectView(R.id.lvRepositories)
+    ListView lvRepositories;
+    @InjectView(R.id.pbLoading)
+    ProgressBar pbLoading;
+    @Inject
+    RepositoriesListActivityPresenter presenter;
+    @Inject
+    AnalyticsManager analyticsManager;
+    private RepositoriesListAdapter repositoriesListAdapter;
 
     public static void startWithUsername(String username, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, RepositoriesListActivity.class);
         intent.putExtra(ARG_USERNAME, username);
         startingActivity.startActivity(intent);
     }
-
-    @InjectView(R.id.lvRepositories)
-    ListView lvRepositories;
-    @InjectView(R.id.pbLoading)
-    ProgressBar pbLoading;
-
-    @Inject
-    RepositoriesListActivityPresenter presenter;
-    @Inject
-    AnalyticsManager analyticsManager;
-
-    private RepositoriesListAdapter repositoriesListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +59,7 @@ public class RepositoriesListActivity extends BaseActivity {
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerRepositoriesListActivityComponent.builder()
-                .apiComponent(((GithubClientApplication) getApplication()).getApiComponent())
+                .appComponent(appComponent)
                 .repositoriesListActivityModule(new RepositoriesListActivityModule(this))
                 .build()
                 .inject(this);
