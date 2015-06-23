@@ -5,7 +5,6 @@ import android.app.Application;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import frogermcs.io.githubclient.ui.activity.ActivityScope;
 import timber.log.Timber;
 
 /**
