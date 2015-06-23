@@ -20,9 +20,9 @@ public class RepositoriesListActivityPresenter {
         this.repositoriesManager = repositoriesManager;
     }
 
-    public void initWithUsername(String username) {
+    public void loadRepositories() {
         repositoriesListActivity.showLoading(true);
-        repositoriesManager.getUsersRepositories(username).subscribe(new SimpleObserver<ImmutableList<Repository>>() {
+        repositoriesManager.getUsersRepositories().subscribe(new SimpleObserver<ImmutableList<Repository>>() {
             @Override
             public void onNext(ImmutableList<Repository> repositories) {
                 repositoriesListActivity.showLoading(false);

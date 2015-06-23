@@ -29,7 +29,7 @@ public class SplashActivityPresenter {
                 @Override
                 public void onNext(User user) {
                     splashActivity.showLoading(false);
-                    splashActivity.showRepositoriesForUser(username);
+                    splashActivity.showRepositoriesForUser(user);
                 }
 
                 @Override

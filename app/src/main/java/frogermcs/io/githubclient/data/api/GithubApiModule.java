@@ -55,10 +55,4 @@ public class GithubApiModule {
     UserManager provideUserManager(GithubApiService githubApiService) {
         return new UserManager(githubApiService);
     }
-
-    @Provides
-    @Singleton
-    RepositoriesManager provideRepositoriesManager(GithubApiService githubApiService) {
-        return new RepositoriesManager(githubApiService);
-    }
 }

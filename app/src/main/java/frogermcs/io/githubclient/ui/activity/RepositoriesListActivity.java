@@ -18,7 +18,9 @@ import butterknife.InjectView;
 import butterknife.OnItemClick;
 import frogermcs.io.githubclient.AppComponent;
 import frogermcs.io.githubclient.R;
+import frogermcs.io.githubclient.data.api.UserModule;
 import frogermcs.io.githubclient.data.model.Repository;
+import frogermcs.io.githubclient.data.model.User;
 import frogermcs.io.githubclient.ui.activity.component.DaggerRepositoriesListActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.RepositoriesListActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoriesListActivityPresenter;
@@ -27,21 +29,24 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 
 public class RepositoriesListActivity extends BaseActivity {
+    private static final String ARG_USER = "arg_user";
 
-    private static final String ARG_USERNAME = "arg_username";
     @InjectView(R.id.lvRepositories)
     ListView lvRepositories;
     @InjectView(R.id.pbLoading)
     ProgressBar pbLoading;
+
     @Inject
     RepositoriesListActivityPresenter presenter;
     @Inject
     AnalyticsManager analyticsManager;
+
+    private User user;
     private RepositoriesListAdapter repositoriesListAdapter;
 
-    public static void startWithUsername(String username, Activity startingActivity) {
+    public static void startWithUsername(User user, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, RepositoriesListActivity.class);
-        intent.putExtra(ARG_USERNAME, username);
+        intent.putExtra(ARG_USER, user);
         startingActivity.startActivity(intent);
     }
 
@@ -50,7 +55,7 @@ public class RepositoriesListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repositories_list);
         ButterKnife.inject(this);
-        presenter.initWithUsername(getIntent().getStringExtra(ARG_USERNAME));
+        presenter.loadRepositories();
 
         repositoriesListAdapter = new RepositoriesListAdapter(this, new ArrayList<Repository>());
         lvRepositories.setAdapter(repositoriesListAdapter);
@@ -58,11 +63,19 @@ public class RepositoriesListActivity extends BaseActivity {
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
+        user = getIntent().getParcelableExtra(ARG_USER);
+
         DaggerRepositoriesListActivityComponent.builder()
-                .appComponent(appComponent)
+                .userComponent(appComponent.plus(new UserModule(user)))
                 .repositoriesListActivityModule(new RepositoriesListActivityModule(this))
                 .build()
                 .inject(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(ARG_USER, user);
     }
 
     public void showLoading(boolean loading) {

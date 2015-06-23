@@ -13,6 +13,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import frogermcs.io.githubclient.AppComponent;
 import frogermcs.io.githubclient.R;
+import frogermcs.io.githubclient.data.model.User;
 import frogermcs.io.githubclient.ui.activity.component.DaggerSplashActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
@@ -60,8 +61,7 @@ public class SplashActivity extends BaseActivity {
         DaggerSplashActivityComponent.builder()
                 .appComponent(appComponent)     //Takes appComponent explicitly (depends on it)
                 .splashActivityModule(new SplashActivityModule(this))
-                .build()
-                .inject(this);
+                .build().inject(this);
     }
 
     @OnClick(R.id.btnShowRepositories)
@@ -69,8 +69,8 @@ public class SplashActivity extends BaseActivity {
         presenter.onShowRepositoriesClick();
     }
 
-    public void showRepositoriesForUser(String username) {
-        RepositoriesListActivity.startWithUsername(username, this);
+    public void showRepositoriesForUser(User user) {
+        RepositoriesListActivity.startWithUsername(user, this);
     }
 
     public void showValidationError() {
