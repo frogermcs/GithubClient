@@ -17,11 +17,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
 import frogermcs.io.githubclient.AppComponent;
+import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
-import frogermcs.io.githubclient.data.api.UserModule;
 import frogermcs.io.githubclient.data.model.Repository;
-import frogermcs.io.githubclient.data.model.User;
-import frogermcs.io.githubclient.ui.activity.component.DaggerRepositoriesListActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.RepositoriesListActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoriesListActivityPresenter;
 import frogermcs.io.githubclient.ui.adapter.RepositoriesListAdapter;
@@ -29,8 +27,6 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 
 public class RepositoriesListActivity extends BaseActivity {
-    private static final String ARG_USER = "arg_user";
-
     @InjectView(R.id.lvRepositories)
     ListView lvRepositories;
     @InjectView(R.id.pbLoading)
@@ -41,14 +37,7 @@ public class RepositoriesListActivity extends BaseActivity {
     @Inject
     AnalyticsManager analyticsManager;
 
-    private User user;
     private RepositoriesListAdapter repositoriesListAdapter;
-
-    public static void startWithUsername(User user, Activity startingActivity) {
-        Intent intent = new Intent(startingActivity, RepositoriesListActivity.class);
-        intent.putExtra(ARG_USER, user);
-        startingActivity.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,20 +51,10 @@ public class RepositoriesListActivity extends BaseActivity {
     }
 
     @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        user = getIntent().getParcelableExtra(ARG_USER);
-
-        DaggerRepositoriesListActivityComponent.builder()
-                .userComponent(appComponent.plus(new UserModule(user)))
-                .repositoriesListActivityModule(new RepositoriesListActivityModule(this))
-                .build()
+    protected void setupActivityComponent() {
+        GithubClientApplication.get(this).getUserComponent()
+                .plus(new RepositoriesListActivityModule(this))
                 .inject(this);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(ARG_USER, user);
     }
 
     public void showLoading(boolean loading) {
@@ -92,5 +71,11 @@ public class RepositoriesListActivity extends BaseActivity {
     public void onRepositoryClick(int position) {
         Repository repository = repositoriesListAdapter.getItem(position);
         RepositoryDetailsActivity.startWithRepository(repository, this);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        GithubClientApplication.get(this).releaseUserComponent();
     }
 }

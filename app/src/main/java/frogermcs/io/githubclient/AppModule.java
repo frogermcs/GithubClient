@@ -6,6 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import frogermcs.io.githubclient.utils.AnalyticsManager;
+import frogermcs.io.githubclient.utils.Validator;
 
 /**
  * Created by Miroslaw Stanek on 22.04.15.
@@ -22,5 +24,17 @@ public class AppModule {
     @Singleton
     public Application provideApplication() {
         return application;
+    }
+
+//    @Provides
+//    @Singleton
+//    AnalyticsManager provideAnalyticsManager() {
+//        return new AnalyticsManager(application);
+//    }
+//
+    @Provides
+    @Singleton
+    Validator provideValidator() {
+        return new Validator();
     }
 }

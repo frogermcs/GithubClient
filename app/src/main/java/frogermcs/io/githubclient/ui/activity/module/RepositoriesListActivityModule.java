@@ -6,6 +6,7 @@ import frogermcs.io.githubclient.data.api.RepositoriesManager;
 import frogermcs.io.githubclient.ui.activity.ActivityScope;
 import frogermcs.io.githubclient.ui.activity.RepositoriesListActivity;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoriesListActivityPresenter;
+import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 /**
  * Created by Miroslaw Stanek on 23.04.15.

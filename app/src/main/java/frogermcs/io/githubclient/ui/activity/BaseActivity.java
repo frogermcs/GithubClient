@@ -14,8 +14,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupActivityComponent(GithubClientApplication.get(this).getAppComponent());
+        setupActivityComponent();
     }
 
-    protected abstract void setupActivityComponent(AppComponent appComponent);
+    protected abstract void setupActivityComponent();
 }

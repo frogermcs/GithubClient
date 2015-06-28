@@ -9,10 +9,9 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import frogermcs.io.githubclient.AppComponent;
+import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
-import frogermcs.io.githubclient.ui.activity.component.DaggerRepositoryDetailsActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.RepositoryDetailsActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoryDetailsActivityPresenter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
@@ -20,14 +19,19 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 public class RepositoryDetailsActivity extends BaseActivity {
     private static final String ARG_REPOSITORY = "arg_repository";
+
     @InjectView(R.id.tvRepoName)
     TextView tvRepoName;
     @InjectView(R.id.tvRepoDetails)
     TextView tvRepoDetails;
+    @InjectView(R.id.tvUserName)
+    TextView tvUserName;
+
     @Inject
     AnalyticsManager analyticsManager;
     @Inject
     RepositoryDetailsActivityPresenter presenter;
+
     private Repository repository;
 
     public static void startWithRepository(Repository repository, Activity startingActivity) {
@@ -46,15 +50,19 @@ public class RepositoryDetailsActivity extends BaseActivity {
         repository = getIntent().getParcelableExtra(ARG_REPOSITORY);
         tvRepoName.setText(repository.name);
         tvRepoDetails.setText(repository.url);
+
+        presenter.init();
     }
 
     @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerRepositoryDetailsActivityComponent.builder()
-                .appComponent(appComponent)
-                .repositoryDetailsActivityModule(new RepositoryDetailsActivityModule(this))
-                .build()
+    protected void setupActivityComponent() {
+        GithubClientApplication.get(this).getUserComponent()
+                .plus(new RepositoryDetailsActivityModule(this))
                 .inject(this);
+
     }
 
+    public void setupUserName(String userName) {
+        tvUserName.setText(userName);
+    }
 }

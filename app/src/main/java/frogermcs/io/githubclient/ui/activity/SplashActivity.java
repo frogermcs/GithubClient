@@ -1,5 +1,6 @@
 package frogermcs.io.githubclient.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,10 +12,9 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import frogermcs.io.githubclient.AppComponent;
+import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.User;
-import frogermcs.io.githubclient.ui.activity.component.DaggerSplashActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
@@ -57,11 +57,10 @@ public class SplashActivity extends BaseActivity {
 
     //Local dependencies graph is constructed here
     @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerSplashActivityComponent.builder()
-                .appComponent(appComponent)     //Takes appComponent explicitly (depends on it)
-                .splashActivityModule(new SplashActivityModule(this))
-                .build().inject(this);
+    protected void setupActivityComponent() {
+        GithubClientApplication.get(this).getDataComponent()
+                .plus(new SplashActivityModule(this))
+                .inject(this);
     }
 
     @OnClick(R.id.btnShowRepositories)
@@ -69,8 +68,9 @@ public class SplashActivity extends BaseActivity {
         presenter.onShowRepositoriesClick();
     }
 
-    public void showRepositoriesForUser(User user) {
-        RepositoriesListActivity.startWithUsername(user, this);
+    public void showRepositoriesListForUser(User user) {
+        GithubClientApplication.get(this).createUserComponent(user);
+        startActivity(new Intent(this, RepositoriesListActivity.class));
     }
 
     public void showValidationError() {
