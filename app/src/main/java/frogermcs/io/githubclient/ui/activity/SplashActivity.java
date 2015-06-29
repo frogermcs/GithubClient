@@ -58,7 +58,7 @@ public class SplashActivity extends BaseActivity {
     //Local dependencies graph is constructed here
     @Override
     protected void setupActivityComponent() {
-        GithubClientApplication.get(this).getDataComponent()
+        GithubClientApplication.get(this).getAppComponent()
                 .plus(new SplashActivityModule(this))
                 .inject(this);
     }
