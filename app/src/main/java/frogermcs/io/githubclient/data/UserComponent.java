@@ -1,14 +1,11 @@
-package frogermcs.io.githubclient.data.api;
+package frogermcs.io.githubclient.data;
 
 import dagger.Subcomponent;
-import frogermcs.io.githubclient.data.UserScope;
-import frogermcs.io.githubclient.data.model.User;
+import frogermcs.io.githubclient.data.api.UserModule;
 import frogermcs.io.githubclient.ui.activity.component.RepositoriesListActivityComponent;
 import frogermcs.io.githubclient.ui.activity.component.RepositoryDetailsActivityComponent;
 import frogermcs.io.githubclient.ui.activity.module.RepositoriesListActivityModule;
 import frogermcs.io.githubclient.ui.activity.module.RepositoryDetailsActivityModule;
-import frogermcs.io.githubclient.utils.AnalyticsManager;
-import frogermcs.io.githubclient.utils.Validator;
 
 /**
  * Created by Miroslaw Stanek on 23.06.15.

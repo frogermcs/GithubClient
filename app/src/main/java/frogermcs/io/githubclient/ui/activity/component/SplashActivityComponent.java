@@ -15,8 +15,6 @@ import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
 )
 public interface SplashActivityComponent {
 
-    //We have to refer explicitly in which classes we want to inject dependencies from this component
-
     SplashActivity inject(SplashActivity splashActivity);
 
     SplashActivityPresenter presenter();
