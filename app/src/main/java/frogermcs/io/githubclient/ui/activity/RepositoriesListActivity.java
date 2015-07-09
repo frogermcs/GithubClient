@@ -1,7 +1,5 @@
 package frogermcs.io.githubclient.ui.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -13,10 +11,9 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
-import frogermcs.io.githubclient.AppComponent;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
@@ -27,9 +24,9 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 
 public class RepositoriesListActivity extends BaseActivity {
-    @InjectView(R.id.lvRepositories)
+    @Bind(R.id.lvRepositories)
     ListView lvRepositories;
-    @InjectView(R.id.pbLoading)
+    @Bind(R.id.pbLoading)
     ProgressBar pbLoading;
 
     @Inject
@@ -43,7 +40,7 @@ public class RepositoriesListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repositories_list);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         presenter.loadRepositories();
 
         repositoriesListAdapter = new RepositoriesListAdapter(this, new ArrayList<Repository>());
