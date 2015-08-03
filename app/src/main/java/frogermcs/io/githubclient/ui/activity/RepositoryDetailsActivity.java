@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
@@ -20,11 +20,11 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 public class RepositoryDetailsActivity extends BaseActivity {
     private static final String ARG_REPOSITORY = "arg_repository";
 
-    @InjectView(R.id.tvRepoName)
+    @Bind(R.id.tvRepoName)
     TextView tvRepoName;
-    @InjectView(R.id.tvRepoDetails)
+    @Bind(R.id.tvRepoDetails)
     TextView tvRepoDetails;
-    @InjectView(R.id.tvUserName)
+    @Bind(R.id.tvUserName)
     TextView tvUserName;
 
     @Inject
@@ -44,7 +44,7 @@ public class RepositoryDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository_details);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         analyticsManager.logScreenView(getClass().getName());
 
         repository = getIntent().getParcelableExtra(ARG_REPOSITORY);
