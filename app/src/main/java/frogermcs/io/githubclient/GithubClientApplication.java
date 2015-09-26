@@ -2,6 +2,7 @@ package frogermcs.io.githubclient;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 
 import frogermcs.io.githubclient.data.UserComponent;
 import frogermcs.io.githubclient.data.api.UserModule;
@@ -11,7 +12,7 @@ import timber.log.Timber;
 /**
  * Created by Miroslaw Stanek on 22.04.15.
  */
-public class GithubClientApplication extends Application {
+    public class GithubClientApplication extends Application {
 
     private AppComponent appComponent;
     private UserComponent userComponent;
@@ -27,7 +28,13 @@ public class GithubClientApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
 
-        appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        initAppComponent();
+    }
+
+    private void initAppComponent() {
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
     public UserComponent createUserComponent(User user) {
@@ -46,4 +53,5 @@ public class GithubClientApplication extends Application {
     public UserComponent getUserComponent() {
         return userComponent;
     }
+
 }

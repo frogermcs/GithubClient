@@ -1,4 +1,4 @@
-package frogermcs.io.githubclient;
+package frogermcs.io.githubclient.tests;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
