@@ -9,8 +9,8 @@ import android.widget.ProgressBar;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
@@ -25,11 +25,11 @@ import rx.android.widget.WidgetObservable;
 
 public class SplashActivity extends BaseActivity {
 
-    @InjectView(R.id.etUsername)
+    @Bind(R.id.etUsername)
     EditText etUsername;
-    @InjectView(R.id.pbLoading)
+    @Bind(R.id.pbLoading)
     ProgressBar pbLoading;
-    @InjectView(R.id.btnShowRepositories)
+    @Bind(R.id.btnShowRepositories)
     Button btnShowRepositories;
 
     //These references will be satisfied by 'SplashActivityComponent.inject(this)' method
@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         analyticsManager.logScreenView(getClass().getName());
 

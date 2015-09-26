@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import frogermcs.io.githubclient.data.model.Repository;
 
 /**
@@ -43,11 +43,11 @@ public class RepositoriesListAdapter extends ArrayAdapter<Repository> {
     }
 
     static class RepositoryHolder {
-        @InjectView(android.R.id.text1)
+        @Bind(android.R.id.text1)
         TextView text1;
 
         public RepositoryHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 }
