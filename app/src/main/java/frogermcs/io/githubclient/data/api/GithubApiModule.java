@@ -23,7 +23,7 @@ public class GithubApiModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient() {
+    public OkHttpClient provideOkHttpClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setConnectTimeout(60 * 1000, TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(60 * 1000, TimeUnit.MILLISECONDS);
@@ -32,7 +32,7 @@ public class GithubApiModule {
 
     @Provides
     @Singleton
-    RestAdapter provideRestAdapter(Application application, OkHttpClient okHttpClient) {
+    public RestAdapter provideRestAdapter(Application application, OkHttpClient okHttpClient) {
         RestAdapter.Builder builder = new RestAdapter.Builder();
         builder.setClient(new OkClient(okHttpClient))
                 .setEndpoint(application.getString(R.string.endpoint));
@@ -46,13 +46,14 @@ public class GithubApiModule {
 
     @Provides
     @Singleton
-    GithubApiService provideGithubApiService(RestAdapter restAdapter) {
+    public GithubApiService provideGithubApiService(RestAdapter restAdapter) {
         return restAdapter.create(GithubApiService.class);
     }
 
     @Provides
     @Singleton
-    UserManager provideUserManager(GithubApiService githubApiService) {
+    public UserManager provideUserManager(GithubApiService githubApiService) {
+        System.out.println("==BBB");
         return new UserManager(githubApiService);
     }
 }

@@ -21,8 +21,8 @@ import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 )
 public interface AppComponent {
 
-    UserComponent plus(UserModule userModule);
+    SplashActivityComponent plus(SplashActivityModule module);
 
-    SplashActivityComponent plus(SplashActivityModule splashActivityModule);
+    UserComponent plus(UserModule userModule);
 
 }

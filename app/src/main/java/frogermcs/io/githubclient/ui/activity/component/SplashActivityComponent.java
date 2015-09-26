@@ -17,5 +17,4 @@ public interface SplashActivityComponent {
 
     SplashActivity inject(SplashActivity splashActivity);
 
-    SplashActivityPresenter presenter();
 }

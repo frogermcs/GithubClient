@@ -14,7 +14,7 @@ import frogermcs.io.githubclient.ui.activity.presenter.RepositoriesListActivityP
         modules = RepositoriesListActivityModule.class
 )
 public interface RepositoriesListActivityComponent {
+
     RepositoriesListActivity inject(RepositoriesListActivity repositoriesListActivity);
 
-    RepositoriesListActivityPresenter presenter();
 }
