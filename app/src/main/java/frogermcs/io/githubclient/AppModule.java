@@ -37,4 +37,18 @@ public class AppModule {
     Validator provideValidator() {
         return new Validator();
     }
+
+    @Provides
+    @Singleton
+    HeavyExternalLibrary provideHeavyExternalLibrary() {
+        HeavyExternalLibrary heavyExternalLibrary = new HeavyExternalLibrary();
+        heavyExternalLibrary.init();
+        return heavyExternalLibrary;
+    }
+
+    @Provides
+    @Singleton
+    HeavyLibraryWrapper provideLibraryWrapper() {
+        return new HeavyLibraryWrapper();
+    }
 }

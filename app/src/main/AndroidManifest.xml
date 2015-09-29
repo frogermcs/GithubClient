@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="frogermcs.io.githubclient">
 
+    <!--Required by Github API client -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--Required by Debug.startMethodTracing() -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".GithubClientApplication"

@@ -2,6 +2,7 @@ package frogermcs.io.githubclient.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,10 +59,13 @@ public class SplashActivity extends BaseActivity {
     //Local dependencies graph is constructed here
     @Override
     protected void setupActivityComponent() {
+        //Uncomment those lines do measure dependencies creation time
+        //Debug.startMethodTracing("SplashTrace");
         GithubClientApplication.get(this)
                 .getAppComponent()
                 .plus(new SplashActivityModule(this))
                 .inject(this);
+        //Debug.stopMethodTracing();
     }
 
     @OnClick(R.id.btnShowRepositories)
