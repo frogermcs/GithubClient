@@ -46,14 +46,11 @@ public class SplashActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         analyticsManager.logScreenView(getClass().getName());
-
-        WidgetObservable.text(etUsername, true).subscribe(new SimpleObserver<OnTextChangeEvent>() {
-            @Override
-            public void onNext(OnTextChangeEvent onTextChangeEvent) {
-                presenter.username = onTextChangeEvent.text().toString();
-                etUsername.setError(null);
-            }
+        WidgetObservable.text(etUsername, true).subscribe((onTextChangeEvent) -> {
+            presenter.username = onTextChangeEvent.text().toString();
+            etUsername.setError(null);
         });
+
     }
 
     //Local dependencies graph is constructed here
