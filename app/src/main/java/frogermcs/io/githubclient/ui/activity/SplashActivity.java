@@ -19,8 +19,6 @@ import frogermcs.io.githubclient.data.model.User;
 import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
-import frogermcs.io.githubclient.utils.SimpleObserver;
-import rx.android.widget.OnTextChangeEvent;
 import rx.android.widget.WidgetObservable;
 
 
