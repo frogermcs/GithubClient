@@ -43,7 +43,7 @@ public class RepositoriesListActivity extends BaseActivity {
         ButterKnife.bind(this);
         presenter.loadRepositories();
 
-        repositoriesListAdapter = new RepositoriesListAdapter(this, new ArrayList<Repository>());
+        repositoriesListAdapter = new RepositoriesListAdapter(this, new ArrayList<>());
         lvRepositories.setAdapter(repositoriesListAdapter);
     }
 

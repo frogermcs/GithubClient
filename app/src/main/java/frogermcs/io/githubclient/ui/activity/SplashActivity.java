@@ -2,7 +2,6 @@ package frogermcs.io.githubclient.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,15 +12,13 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.User;
 import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
-import frogermcs.io.githubclient.utils.SimpleObserver;
-import rx.android.widget.OnTextChangeEvent;
-import rx.android.widget.WidgetObservable;
 
 
 public class SplashActivity extends BaseActivity {
@@ -44,17 +41,15 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-
         analyticsManager.logScreenView(getClass().getName());
-
-        WidgetObservable.text(etUsername, true).subscribe(new SimpleObserver<OnTextChangeEvent>() {
-            @Override
-            public void onNext(OnTextChangeEvent onTextChangeEvent) {
-                presenter.username = onTextChangeEvent.text().toString();
-                etUsername.setError(null);
-            }
-        });
     }
+
+    @OnTextChanged(R.id.etUsername)
+    public void etUsernameTextChanged(CharSequence text){
+        presenter.username = text.toString();
+        etUsername.setError(null);
+    }
+
 
     //Local dependencies graph is constructed here
     @Override
