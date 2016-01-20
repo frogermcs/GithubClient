@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.jakewharton.rxbinding.widget.RxTextView;
+import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -19,9 +22,8 @@ import frogermcs.io.githubclient.data.model.User;
 import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
-import frogermcs.io.githubclient.utils.SimpleObserver;
-import rx.android.widget.OnTextChangeEvent;
-import rx.android.widget.WidgetObservable;
+import rx.Subscription;
+import rx.functions.Action1;
 
 
 public class SplashActivity extends BaseActivity {
@@ -39,6 +41,8 @@ public class SplashActivity extends BaseActivity {
     @Inject
     AnalyticsManager analyticsManager;
 
+    private Subscription textChangeSubscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +51,19 @@ public class SplashActivity extends BaseActivity {
 
         analyticsManager.logScreenView(getClass().getName());
 
-        WidgetObservable.text(etUsername, true).subscribe(new SimpleObserver<OnTextChangeEvent>() {
+        textChangeSubscription = RxTextView.textChangeEvents(etUsername).subscribe(new Action1<TextViewTextChangeEvent>() {
             @Override
-            public void onNext(OnTextChangeEvent onTextChangeEvent) {
-                presenter.username = onTextChangeEvent.text().toString();
+            public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
+                presenter.username = textViewTextChangeEvent.text().toString();
                 etUsername.setError(null);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        textChangeSubscription.unsubscribe();
     }
 
     //Local dependencies graph is constructed here

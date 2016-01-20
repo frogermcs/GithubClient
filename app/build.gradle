@@ -3,7 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -25,16 +25,18 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
 
     //Dagger 2
-    compile 'com.google.dagger:dagger:2.0.1'
-    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    compile 'com.google.dagger:dagger:2.0.2'
+    apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.jakewharton.timber:timber:3.1.0'
-    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'com.jakewharton.timber:timber:4.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
@@ -43,6 +45,7 @@ dependencies {
     testCompile "org.robolectric:robolectric:3.0"
     testCompile "org.mockito:mockito-core:1.10.19"
 
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.4'
     androidTestCompile 'com.android.support.test:rules:0.4'
