@@ -4,30 +4,29 @@ import dagger.Module;
 import dagger.Provides;
 import frogermcs.io.githubclient.data.api.RepositoriesManager;
 import frogermcs.io.githubclient.ui.activity.ActivityScope;
-import frogermcs.io.githubclient.ui.activity.RepositoriesListActivity;
+import frogermcs.io.githubclient.ui.activity.RepositoriesListUI;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoriesListActivityPresenter;
-import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 /**
  * Created by Miroslaw Stanek on 23.04.15.
  */
 @Module
 public class RepositoriesListActivityModule {
-    private RepositoriesListActivity repositoriesListActivity;
+    private RepositoriesListUI repositoriesListUI;
 
-    public RepositoriesListActivityModule(RepositoriesListActivity repositoriesListActivity) {
-        this.repositoriesListActivity = repositoriesListActivity;
+    public RepositoriesListActivityModule(RepositoriesListUI repositoriesListUI) {
+        this.repositoriesListUI = repositoriesListUI;
     }
 
     @Provides
     @ActivityScope
-    RepositoriesListActivity provideRepositoriesListActivity() {
-        return repositoriesListActivity;
+    RepositoriesListUI provideRepositoriesListActivity() {
+        return repositoriesListUI;
     }
 
     @Provides
     @ActivityScope
     RepositoriesListActivityPresenter provideRepositoriesListActivityPresenter(RepositoriesManager repositoriesManager) {
-        return new RepositoriesListActivityPresenter(repositoriesListActivity, repositoriesManager);
+        return new RepositoriesListActivityPresenter(repositoriesListUI, repositoriesManager);
     }
 }

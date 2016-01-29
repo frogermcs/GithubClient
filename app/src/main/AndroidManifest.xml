@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ui.activity.RepositoriesListActivity" />
         <activity android:name=".ui.activity.RepositoryDetailsActivity" />
+        <activity android:name=".ui.activity.CombinedActivity"/>
     </application>
 
 </manifest>

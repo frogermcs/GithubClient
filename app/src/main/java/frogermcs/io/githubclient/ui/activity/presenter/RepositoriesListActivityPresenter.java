@@ -4,34 +4,34 @@ import com.google.common.collect.ImmutableList;
 
 import frogermcs.io.githubclient.data.api.RepositoriesManager;
 import frogermcs.io.githubclient.data.model.Repository;
-import frogermcs.io.githubclient.ui.activity.RepositoriesListActivity;
+import frogermcs.io.githubclient.ui.activity.RepositoriesListUI;
 import frogermcs.io.githubclient.utils.SimpleObserver;
 
 /**
  * Created by Miroslaw Stanek on 23.04.15.
  */
 public class RepositoriesListActivityPresenter {
-    private RepositoriesListActivity repositoriesListActivity;
+    private RepositoriesListUI repositoriesListUI;
     private RepositoriesManager repositoriesManager;
 
-    public RepositoriesListActivityPresenter(RepositoriesListActivity repositoriesListActivity,
+    public RepositoriesListActivityPresenter(RepositoriesListUI repositoriesListUI,
                                              RepositoriesManager repositoriesManager) {
-        this.repositoriesListActivity = repositoriesListActivity;
+        this.repositoriesListUI = repositoriesListUI;
         this.repositoriesManager = repositoriesManager;
     }
 
     public void loadRepositories() {
-        repositoriesListActivity.showLoading(true);
+        repositoriesListUI.showLoading(true);
         repositoriesManager.getUsersRepositories().subscribe(new SimpleObserver<ImmutableList<Repository>>() {
             @Override
             public void onNext(ImmutableList<Repository> repositories) {
-                repositoriesListActivity.showLoading(false);
-                repositoriesListActivity.setRepositories(repositories);
+                repositoriesListUI.showLoading(false);
+                repositoriesListUI.setRepositories(repositories);
             }
 
             @Override
             public void onError(Throwable e) {
-                repositoriesListActivity.showLoading(false);
+                repositoriesListUI.showLoading(false);
             }
         });
     }
