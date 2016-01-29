@@ -17,7 +17,7 @@ import frogermcs.io.githubclient.ui.activity.presenter.RepositoryDetailsActivity
 import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 
-public class RepositoryDetailsActivity extends BaseActivity {
+public class RepositoryDetailsActivity extends BaseActivity implements DetailUi {
     private static final String ARG_REPOSITORY = "arg_repository";
 
     @Bind(R.id.tvRepoName)
@@ -62,6 +62,7 @@ public class RepositoryDetailsActivity extends BaseActivity {
 
     }
 
+    @Override
     public void setupUserName(String userName) {
         tvUserName.setText(userName);
     }
