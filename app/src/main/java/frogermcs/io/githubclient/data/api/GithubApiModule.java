@@ -2,8 +2,6 @@ package frogermcs.io.githubclient.data.api;
 
 import android.app.Application;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -12,8 +10,11 @@ import dagger.Module;
 import dagger.Provides;
 import frogermcs.io.githubclient.BuildConfig;
 import frogermcs.io.githubclient.R;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.RxJavaCallAdapterFactory;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
 
 /**
  * Created by Miroslaw Stanek on 22.04.15.
@@ -24,36 +25,40 @@ public class GithubApiModule {
     @Provides
     @Singleton
     public OkHttpClient provideOkHttpClient() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.setConnectTimeout(60 * 1000, TimeUnit.MILLISECONDS);
-        okHttpClient.setReadTimeout(60 * 1000, TimeUnit.MILLISECONDS);
-        return okHttpClient;
-    }
-
-    @Provides
-    @Singleton
-    public RestAdapter provideRestAdapter(Application application, OkHttpClient okHttpClient) {
-        RestAdapter.Builder builder = new RestAdapter.Builder();
-        builder.setClient(new OkClient(okHttpClient))
-                .setEndpoint(application.getString(R.string.endpoint));
+        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         if (BuildConfig.DEBUG) {
-            builder.setLogLevel(RestAdapter.LogLevel.FULL);
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(logging);
         }
+
+        builder.connectTimeout(60 * 1000, TimeUnit.MILLISECONDS)
+                .readTimeout(60 * 1000, TimeUnit.MILLISECONDS);
 
         return builder.build();
     }
 
     @Provides
     @Singleton
-    public GithubApiService provideGithubApiService(RestAdapter restAdapter) {
+    public Retrofit provideRestAdapter(Application application, OkHttpClient okHttpClient) {
+        Retrofit.Builder builder = new Retrofit.Builder();
+        builder.client(okHttpClient)
+                .baseUrl(application.getString(R.string.endpoint))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create());
+        return builder.build();
+    }
+
+    @Provides
+    @Singleton
+    public GithubApiService provideGithubApiService(Retrofit restAdapter) {
         return restAdapter.create(GithubApiService.class);
     }
 
     @Provides
     @Singleton
     public UserManager provideUserManager(GithubApiService githubApiService) {
-        System.out.println("==BBB");
         return new UserManager(githubApiService);
     }
 }
