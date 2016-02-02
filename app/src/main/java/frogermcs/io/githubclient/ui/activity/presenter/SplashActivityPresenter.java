@@ -1,5 +1,7 @@
 package frogermcs.io.githubclient.ui.activity.presenter;
 
+import android.os.Handler;
+
 import frogermcs.io.githubclient.HeavyLibraryWrapper;
 import frogermcs.io.githubclient.data.api.UserManager;
 import frogermcs.io.githubclient.data.model.User;
@@ -13,23 +15,22 @@ import frogermcs.io.githubclient.utils.Validator;
 public class SplashActivityPresenter {
     public String username;
 
-    private SplashActivity splashActivity;
-    private Validator validator;
-    private UserManager userManager;
-    private HeavyLibraryWrapper heavyLibraryWrapper;
+    private final SplashActivity splashActivity;
+    private final Validator validator;
+    private final UserManager userManager;
 
     public SplashActivityPresenter(SplashActivity splashActivity, Validator validator,
                                    UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
         this.splashActivity = splashActivity;
         this.validator = validator;
         this.userManager = userManager;
-        this.heavyLibraryWrapper = heavyLibraryWrapper;
 
+        HeavyLibraryWrapper heavyLibraryWrapper1 = heavyLibraryWrapper;
         //This calls should be delivered to ExternalLibrary right after it will be initialized
-        this.heavyLibraryWrapper.callMethod();
-        this.heavyLibraryWrapper.callMethod();
-        this.heavyLibraryWrapper.callMethod();
-        this.heavyLibraryWrapper.callMethod();
+        heavyLibraryWrapper1.callMethod();
+        heavyLibraryWrapper1.callMethod();
+        heavyLibraryWrapper1.callMethod();
+        heavyLibraryWrapper1.callMethod();
     }
 
     public void onShowRepositoriesClick() {
@@ -38,7 +39,13 @@ public class SplashActivityPresenter {
             userManager.getUser(username).subscribe(new SimpleObserver<User>() {
                 @Override
                 public void onNext(User user) {
-                    splashActivity.showLoading(false);
+                    // To avoid prematurely hiding the progressbar, post delayed
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override public void run() {
+                            splashActivity.showLoading(false);
+                        }
+                    }, 1000 /* 1 sec */);
                     splashActivity.showRepositoriesListForUser(user);
                 }
 

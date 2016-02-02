@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-alpha6'
+        classpath 'com.android.tools.build:gradle:2.0.0-alpha9'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2.1'
     }

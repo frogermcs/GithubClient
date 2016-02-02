@@ -2,7 +2,6 @@ package frogermcs.io.githubclient;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 
 import com.frogermcs.dagger2metrics.Dagger2Metrics;
 
@@ -14,8 +13,7 @@ import timber.log.Timber;
 /**
  * Created by Miroslaw Stanek on 22.04.15.
  */
-    public class GithubClientApplication extends Application {
-
+public class GithubClientApplication extends Application {
     private AppComponent appComponent;
     private UserComponent userComponent;
 
