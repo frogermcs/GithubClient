@@ -1,10 +1,9 @@
-package frogermcs.io.githubclient.ui.activity.component;
+package frogermcs.io.githubclient.dependencyinjection.components;
 
 import dagger.Subcomponent;
-import frogermcs.io.githubclient.ui.activity.ActivityScope;
+import frogermcs.io.githubclient.dependencyinjection.scopes.ActivityScope;
 import frogermcs.io.githubclient.ui.activity.SplashActivity;
-import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
-import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
+import frogermcs.io.githubclient.dependencyinjection.modules.SplashActivityModule;
 
 /**
  * Created by Miroslaw Stanek on 23.04.15.

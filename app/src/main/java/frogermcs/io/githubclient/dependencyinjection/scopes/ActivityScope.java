@@ -1,4 +1,4 @@
-package frogermcs.io.githubclient.ui.activity;
+package frogermcs.io.githubclient.dependencyinjection.scopes;
 
 import javax.inject.Scope;
 
