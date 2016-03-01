@@ -2,9 +2,8 @@ package frogermcs.io.githubclient;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 
-import com.frogermcs.dagger2metrics.Dagger2Metrics;
+import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 
 import frogermcs.io.githubclient.data.UserComponent;
 import frogermcs.io.githubclient.data.api.UserModule;
@@ -28,7 +27,7 @@ import timber.log.Timber;
         super.onCreate();
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-            Dagger2Metrics.enableCapturing(this);
+            AndroidDevMetrics.initWith(this);
         }
 
         initAppComponent();
