@@ -1,4 +1,4 @@
-package frogermcs.io.githubclient.data;
+package frogermcs.io.githubclient.dependencyinjection.scopes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

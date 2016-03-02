@@ -1,4 +1,4 @@
-package frogermcs.io.githubclient;
+package frogermcs.io.githubclient.dependencyinjection.modules;
 
 import android.app.Application;
 
@@ -6,6 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import frogermcs.io.githubclient.HeavyExternalLibrary;
+import frogermcs.io.githubclient.HeavyLibraryWrapper;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
 import frogermcs.io.githubclient.utils.Validator;
 

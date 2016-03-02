@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
-import frogermcs.io.githubclient.ui.activity.module.RepositoryDetailsActivityModule;
+import frogermcs.io.githubclient.dependencyinjection.modules.RepositoryDetailsActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoryDetailsActivityPresenter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
 

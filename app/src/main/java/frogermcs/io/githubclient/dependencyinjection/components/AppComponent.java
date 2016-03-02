@@ -1,13 +1,12 @@
-package frogermcs.io.githubclient;
+package frogermcs.io.githubclient.dependencyinjection.components;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+import frogermcs.io.githubclient.dependencyinjection.modules.AppModule;
 import frogermcs.io.githubclient.data.api.GithubApiModule;
-import frogermcs.io.githubclient.data.UserComponent;
-import frogermcs.io.githubclient.data.api.UserModule;
-import frogermcs.io.githubclient.ui.activity.component.SplashActivityComponent;
-import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
+import frogermcs.io.githubclient.dependencyinjection.modules.UserModule;
+import frogermcs.io.githubclient.dependencyinjection.modules.SplashActivityModule;
 
 /**
  * Created by Miroslaw Stanek on 22.04.15.

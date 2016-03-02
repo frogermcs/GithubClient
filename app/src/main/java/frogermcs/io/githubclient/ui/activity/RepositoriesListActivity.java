@@ -17,7 +17,7 @@ import butterknife.OnItemClick;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
-import frogermcs.io.githubclient.ui.activity.module.RepositoriesListActivityModule;
+import frogermcs.io.githubclient.dependencyinjection.modules.RepositoriesListActivityModule;
 import frogermcs.io.githubclient.ui.activity.presenter.RepositoriesListActivityPresenter;
 import frogermcs.io.githubclient.ui.adapter.RepositoriesListAdapter;
 import frogermcs.io.githubclient.utils.AnalyticsManager;

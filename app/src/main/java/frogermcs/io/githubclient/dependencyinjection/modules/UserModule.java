@@ -1,8 +1,10 @@
-package frogermcs.io.githubclient.data.api;
+package frogermcs.io.githubclient.dependencyinjection.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import frogermcs.io.githubclient.data.UserScope;
+import frogermcs.io.githubclient.dependencyinjection.scopes.UserScope;
+import frogermcs.io.githubclient.data.api.GithubApiService;
+import frogermcs.io.githubclient.data.api.RepositoriesManager;
 import frogermcs.io.githubclient.data.model.User;
 
 /**

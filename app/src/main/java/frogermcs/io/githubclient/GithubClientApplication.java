@@ -5,8 +5,11 @@ import android.content.Context;
 
 import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 
-import frogermcs.io.githubclient.data.UserComponent;
-import frogermcs.io.githubclient.data.api.UserModule;
+import frogermcs.io.githubclient.dependencyinjection.components.AppComponent;
+import frogermcs.io.githubclient.dependencyinjection.components.DaggerAppComponent;
+import frogermcs.io.githubclient.dependencyinjection.components.UserComponent;
+import frogermcs.io.githubclient.dependencyinjection.modules.AppModule;
+import frogermcs.io.githubclient.dependencyinjection.modules.UserModule;
 import frogermcs.io.githubclient.data.model.User;
 import timber.log.Timber;
 
