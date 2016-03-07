@@ -2,9 +2,6 @@ package frogermcs.io.githubclient.ui.activity.module;
 
 import dagger.Module;
 import dagger.Provides;
-import frogermcs.io.githubclient.HeavyExternalLibrary;
-import frogermcs.io.githubclient.HeavyLibraryWrapper;
-import frogermcs.io.githubclient.data.api.UserManager;
 import frogermcs.io.githubclient.ui.activity.ActivityScope;
 import frogermcs.io.githubclient.ui.activity.SplashActivity;
 import frogermcs.io.githubclient.ui.activity.presenter.SplashActivityPresenter;
@@ -29,8 +26,7 @@ public class SplashActivityModule {
 
     @Provides
     @ActivityScope
-    SplashActivityPresenter
-    provideSplashActivityPresenter(Validator validator, UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
-        return new SplashActivityPresenter(splashActivity, validator, userManager, heavyLibraryWrapper);
+    SplashActivityPresenter provideSplashActivityPresenter(Validator validator) {
+        return new SplashActivityPresenter(splashActivity, validator);
     }
 }

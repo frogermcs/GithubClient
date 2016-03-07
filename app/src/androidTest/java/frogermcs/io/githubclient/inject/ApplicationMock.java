@@ -4,7 +4,6 @@ import frogermcs.io.githubclient.AppComponent;
 import frogermcs.io.githubclient.AppModule;
 import frogermcs.io.githubclient.DaggerAppComponent;
 import frogermcs.io.githubclient.GithubClientApplication;
-import frogermcs.io.githubclient.data.api.GithubApiModule;
 
 /**
  * Created by Miroslaw Stanek on 24.09.15.

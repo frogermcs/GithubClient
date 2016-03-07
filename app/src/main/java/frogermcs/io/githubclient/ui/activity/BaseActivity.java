@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import frogermcs.io.githubclient.AppComponent;
+import frogermcs.io.githubclient.AppProductionComponent;
 import frogermcs.io.githubclient.GithubClientApplication;
 
 /**
@@ -18,4 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void setupActivityComponent();
+
+    public AppProductionComponent getAppProductionComponent() {
+        return GithubClientApplication.get(this).getAppProductionComponent();
+    }
 }
