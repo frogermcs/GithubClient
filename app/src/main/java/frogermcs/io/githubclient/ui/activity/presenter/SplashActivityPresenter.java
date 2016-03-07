@@ -16,20 +16,11 @@ public class SplashActivityPresenter {
     private SplashActivity splashActivity;
     private Validator validator;
     private UserManager userManager;
-    private HeavyLibraryWrapper heavyLibraryWrapper;
 
-    public SplashActivityPresenter(SplashActivity splashActivity, Validator validator,
-                                   UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
+    public SplashActivityPresenter(SplashActivity splashActivity, Validator validator, UserManager userManager) {
         this.splashActivity = splashActivity;
         this.validator = validator;
         this.userManager = userManager;
-        this.heavyLibraryWrapper = heavyLibraryWrapper;
-
-        //This calls should be delivered to ExternalLibrary right after it will be initialized
-        this.heavyLibraryWrapper.callMethod();
-        this.heavyLibraryWrapper.callMethod();
-        this.heavyLibraryWrapper.callMethod();
-        this.heavyLibraryWrapper.callMethod();
     }
 
     public void onShowRepositoriesClick() {

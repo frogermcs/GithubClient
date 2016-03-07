@@ -30,7 +30,7 @@ public class SplashActivityModule {
     @Provides
     @ActivityScope
     SplashActivityPresenter
-    provideSplashActivityPresenter(Validator validator, UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
-        return new SplashActivityPresenter(splashActivity, validator, userManager, heavyLibraryWrapper);
+    provideSplashActivityPresenter(Validator validator, UserManager userManager) {
+        return new SplashActivityPresenter(splashActivity, validator, userManager);
     }
 }
