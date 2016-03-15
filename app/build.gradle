@@ -29,9 +29,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
 
     //Dagger 2
-    compile 'com.google.dagger:dagger:2.1-SNAPSHOT'
-    compile 'com.google.dagger:dagger-producers:2.1-SNAPSHOT'
-    apt 'com.google.dagger:dagger-compiler:2.1-SNAPSHOT'
+    compile 'com.google.dagger:dagger:2.1'
+    compile 'com.google.dagger:dagger-producers:2.1'
+    apt 'com.google.dagger:dagger-compiler:2.1'
 
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.jakewharton.timber:timber:4.1.0'
