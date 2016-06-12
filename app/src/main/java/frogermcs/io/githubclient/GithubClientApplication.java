@@ -5,20 +5,18 @@ import android.content.Context;
 
 import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 
-import java.util.concurrent.Executors;
-
 import frogermcs.io.githubclient.data.UserComponent;
 import frogermcs.io.githubclient.data.api.UserModule;
+import frogermcs.io.githubclient.data.model.User;
 import timber.log.Timber;
 
 /**
  * Created by Miroslaw Stanek on 22.04.15.
  */
-public class GithubClientApplication extends Application {
+    public class GithubClientApplication extends Application {
 
     private AppComponent appComponent;
     private UserComponent userComponent;
-    private AppProductionComponent appProductionComponent;
 
     public static GithubClientApplication get(Context context) {
         return (GithubClientApplication) context.getApplicationContext();
@@ -39,16 +37,10 @@ public class GithubClientApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
-
-
-        appProductionComponent = DaggerAppProductionComponent.builder()
-                .executor(Executors.newSingleThreadExecutor())
-                .appComponent(appComponent)
-                .build();
     }
 
-    public UserComponent createUserComponent(UserModule userModule) {
-        userComponent = appComponent.plus(userModule);
+    public UserComponent createUserComponent(User user) {
+        userComponent = appComponent.plus(new UserModule(user));
         return userComponent;
     }
 
@@ -62,10 +54,6 @@ public class GithubClientApplication extends Application {
 
     public UserComponent getUserComponent() {
         return userComponent;
-    }
-
-    public AppProductionComponent getAppProductionComponent() {
-        return appProductionComponent;
     }
 
 }

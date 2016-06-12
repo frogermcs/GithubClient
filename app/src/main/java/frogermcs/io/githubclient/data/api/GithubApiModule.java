@@ -1,29 +1,32 @@
-package frogermcs.io.githubclient;
+package frogermcs.io.githubclient.data.api;
 
 import android.app.Application;
 
 import java.util.concurrent.TimeUnit;
 
-import dagger.producers.ProducerModule;
-import dagger.producers.Produces;
-import frogermcs.io.githubclient.data.api.GithubApiService;
-import frogermcs.io.githubclient.data.api.UserManager;
-import frogermcs.io.githubclient.data.api.UserModule;
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
+import frogermcs.io.githubclient.BuildConfig;
+import frogermcs.io.githubclient.R;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.RxJavaCallAdapterFactory;
+import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Miroslaw Stanek on 05.03.2016.
+ * Created by Miroslaw Stanek on 22.04.15.
  */
-@ProducerModule
-public class GithubApiProducerModule {
+@Module
+public class GithubApiModule {
 
-    @Produces
-    public OkHttpClient produceOkHttpClient() {
+    @Provides
+    @Singleton
+    public OkHttpClient provideOkHttpClient() {
         final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -36,8 +39,9 @@ public class GithubApiProducerModule {
         return builder.build();
     }
 
-    @Produces
-    public Retrofit produceRestAdapter(Application application, OkHttpClient okHttpClient) {
+    @Provides
+    @Singleton
+    public Retrofit provideRestAdapter(Application application, OkHttpClient okHttpClient) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(okHttpClient)
                 .baseUrl(application.getString(R.string.endpoint))
@@ -46,18 +50,15 @@ public class GithubApiProducerModule {
         return builder.build();
     }
 
-    @Produces
-    public GithubApiService produceGithubApiService(Retrofit restAdapter) {
+    @Provides
+    @Singleton
+    public GithubApiService provideGithubApiService(Retrofit restAdapter) {
         return restAdapter.create(GithubApiService.class);
     }
 
-    @Produces
-    public UserManager produceUserManager(GithubApiService githubApiService) {
+    @Provides
+    @Singleton
+    public UserManager provideUserManager(GithubApiService githubApiService) {
         return new UserManager(githubApiService);
-    }
-
-    @Produces
-    public UserModule.Factory produceUserModuleFactory(GithubApiService githubApiService) {
-        return new UserModule.Factory(githubApiService);
     }
 }

@@ -1,13 +1,9 @@
 buildscript {
     repositories {
         jcenter()
-        mavenCentral()
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots"
-        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-beta5'
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.4'
     }
@@ -16,9 +12,5 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        mavenCentral()
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots"
-        }
     }
 }
