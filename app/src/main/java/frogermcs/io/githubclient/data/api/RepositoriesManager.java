@@ -35,6 +35,8 @@ public class RepositoriesManager {
                             repository.id = repositoryResponse.id;
                             repository.name = repositoryResponse.name;
                             repository.url = repositoryResponse.url;
+                            repository.stargazers_count = repositoryResponse.stargazers_count;
+                            repository.forks_count = repositoryResponse.forks_count;
                             listBuilder.add(repository);
                         }
                         return listBuilder.build();

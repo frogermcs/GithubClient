@@ -1,53 +1,75 @@
 package frogermcs.io.githubclient.ui.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import frogermcs.io.githubclient.data.model.Repository;
+import frogermcs.io.githubclient.ui.activity.RepositoriesListActivity;
+import frogermcs.io.githubclient.ui.adapter.viewholder.RepositoriesListViewHolderFactory;
+import frogermcs.io.githubclient.ui.adapter.viewholder.RepositoryViewHolder;
 
 /**
  * Created by Miroslaw Stanek on 24.04.15.
  */
-public class RepositoriesListAdapter extends ArrayAdapter<Repository> {
+public class RepositoriesListAdapter extends RecyclerView.Adapter {
 
-    private LayoutInflater inflater;
+    private RepositoriesListActivity repositoriesListActivity;
+    private Map<Integer, RepositoriesListViewHolderFactory> viewHolderFactories;
 
-    public RepositoriesListAdapter(Context context, List<Repository> objects) {
-        super(context, 0, objects);
-        this.inflater = LayoutInflater.from(context);
+    private final List<Repository> repositories = new ArrayList<>();
+
+    public RepositoriesListAdapter(RepositoriesListActivity repositoriesListActivity,
+                                   Map<Integer, RepositoriesListViewHolderFactory> viewHolderFactories) {
+        this.repositoriesListActivity = repositoriesListActivity;
+        this.viewHolderFactories = viewHolderFactories;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        RepositoryHolder holder;
-        if (convertView == null) {
-            convertView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-            holder = new RepositoryHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (RepositoryHolder) convertView.getTag();
-        }
-
-        Repository repository = getItem(position);
-        holder.text1.setText(repository.name);
-
-        return convertView;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        final RecyclerView.ViewHolder viewHolder = viewHolderFactories.get(viewType).createViewHolder(parent);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRepositoryItemClicked(viewHolder.getAdapterPosition());
+            }
+        });
+        return viewHolder;
     }
 
-    static class RepositoryHolder {
-        @Bind(android.R.id.text1)
-        TextView text1;
+    private void onRepositoryItemClicked(int adapterPosition) {
+        repositoriesListActivity.onRepositoryClick(repositories.get(adapterPosition));
+    }
 
-        public RepositoryHolder(View view) {
-            ButterKnife.bind(this, view);
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((RepositoryViewHolder) holder).bind(repositories.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return repositories.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        Repository repository = repositories.get(position);
+        if (repository.stargazers_count > 500) {
+            if (repository.forks_count > 100) {
+                return Repository.TYPE_FEATURED;
+            }
+            return Repository.TYPE_BIG;
         }
+        return Repository.TYPE_NORMAL;
+    }
+
+    public void updateRepositoriesList(List<Repository> repositories) {
+        this.repositories.clear();
+        this.repositories.addAll(repositories);
+        notifyDataSetChanged();
     }
 }
