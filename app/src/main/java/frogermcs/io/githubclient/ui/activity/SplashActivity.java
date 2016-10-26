@@ -13,7 +13,7 @@ import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import frogermcs.io.githubclient.GithubClientApplication;
@@ -28,11 +28,11 @@ import rx.functions.Action1;
 
 public class SplashActivity extends BaseActivity {
 
-    @Bind(R.id.etUsername)
+    @BindView(R.id.etUsername)
     EditText etUsername;
-    @Bind(R.id.pbLoading)
+    @BindView(R.id.pbLoading)
     ProgressBar pbLoading;
-    @Bind(R.id.btnShowRepositories)
+    @BindView(R.id.btnShowRepositories)
     Button btnShowRepositories;
 
     //These references will be satisfied by 'SplashActivityComponent.inject(this)' method

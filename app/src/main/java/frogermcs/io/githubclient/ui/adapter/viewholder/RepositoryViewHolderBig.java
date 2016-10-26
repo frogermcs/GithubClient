@@ -1,13 +1,12 @@
 package frogermcs.io.githubclient.ui.adapter.viewholder;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.auto.factory.AutoFactory;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
@@ -18,11 +17,11 @@ import frogermcs.io.githubclient.data.model.Repository;
 @AutoFactory(implementing = RepositoriesListViewHolderFactory.class)
 public class RepositoryViewHolderBig extends RepositoryViewHolder {
 
-    @Bind(R.id.tvName)
+    @BindView(R.id.tvName)
     TextView tvName;
-    @Bind(R.id.tvStars)
+    @BindView(R.id.tvStars)
     TextView tvStars;
-    @Bind(R.id.tvForks)
+    @BindView(R.id.tvForks)
     TextView tvForks;
 
     public RepositoryViewHolderBig(ViewGroup parent) {

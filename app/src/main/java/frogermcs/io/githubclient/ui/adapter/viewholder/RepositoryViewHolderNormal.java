@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.google.auto.factory.AutoFactory;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import frogermcs.io.githubclient.R;
 import frogermcs.io.githubclient.data.model.Repository;
@@ -17,7 +17,7 @@ import frogermcs.io.githubclient.data.model.Repository;
 @AutoFactory(implementing = RepositoriesListViewHolderFactory.class)
 public class RepositoryViewHolderNormal extends RepositoryViewHolder {
 
-    @Bind(R.id.tvName)
+    @BindView(R.id.tvName)
     TextView tvName;
 
     public RepositoryViewHolderNormal(ViewGroup parent) {
