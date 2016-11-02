@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableList;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
@@ -21,9 +21,9 @@ import frogermcs.io.githubclient.ui.adapter.RepositoriesListAdapter;
 
 
 public class RepositoriesListActivity extends BaseActivity {
-    @Bind(R.id.rvRepositories)
+    @BindView(R.id.rvRepositories)
     RecyclerView rvRepositories;
-    @Bind(R.id.pbLoading)
+    @BindView(R.id.pbLoading)
     ProgressBar pbLoading;
 
     @Inject
