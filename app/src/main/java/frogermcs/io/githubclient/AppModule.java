@@ -28,12 +28,6 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AnalyticsManager provideAnalyticsManager() {
-        return new AnalyticsManager(application);
-    }
-
-    @Provides
-    @Singleton
     Validator provideValidator() {
         return new Validator();
     }
