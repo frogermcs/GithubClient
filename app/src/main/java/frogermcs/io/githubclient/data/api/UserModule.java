@@ -12,11 +12,9 @@ import frogermcs.io.githubclient.data.model.User;
 public class UserModule {
 
     private User user;
-    private GithubApiService githubApiService;
 
-    private UserModule(User user, GithubApiService githubApiService) {
+    public UserModule(User user) {
         this.user = user;
-        this.githubApiService = githubApiService;
     }
 
     @Provides
@@ -27,19 +25,7 @@ public class UserModule {
 
     @Provides
     @UserScope
-    RepositoriesManager provideRepositoriesManager() {
+    RepositoriesManager provideRepositoriesManager(User user, GithubApiService githubApiService) {
         return new RepositoriesManager(user, githubApiService);
-    }
-
-    public static class Factory {
-        private GithubApiService githubApiService;
-
-        public Factory(GithubApiService githubApiService) {
-            this.githubApiService = githubApiService;
-        }
-
-        public UserModule create(User user) {
-            return new UserModule(user, githubApiService);
-        }
     }
 }
