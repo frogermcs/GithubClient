@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import frogermcs.io.githubclient.GithubClientApplication;
@@ -24,9 +24,9 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 
 public class RepositoriesListActivity extends BaseActivity {
-    @Bind(R.id.lvRepositories)
+    @BindView(R.id.lvRepositories)
     ListView lvRepositories;
-    @Bind(R.id.pbLoading)
+    @BindView(R.id.pbLoading)
     ProgressBar pbLoading;
 
     @Inject

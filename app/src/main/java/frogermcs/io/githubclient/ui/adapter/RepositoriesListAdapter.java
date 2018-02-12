@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import frogermcs.io.githubclient.data.model.Repository;
 
@@ -43,7 +43,7 @@ public class RepositoriesListAdapter extends ArrayAdapter<Repository> {
     }
 
     static class RepositoryHolder {
-        @Bind(android.R.id.text1)
+        @BindView(android.R.id.text1)
         TextView text1;
 
         public RepositoryHolder(View view) {

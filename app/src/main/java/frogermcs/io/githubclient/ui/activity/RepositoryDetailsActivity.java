@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import frogermcs.io.githubclient.GithubClientApplication;
 import frogermcs.io.githubclient.R;
@@ -20,11 +20,11 @@ import frogermcs.io.githubclient.utils.AnalyticsManager;
 public class RepositoryDetailsActivity extends BaseActivity {
     private static final String ARG_REPOSITORY = "arg_repository";
 
-    @Bind(R.id.tvRepoName)
+    @BindView(R.id.tvRepoName)
     TextView tvRepoName;
-    @Bind(R.id.tvRepoDetails)
+    @BindView(R.id.tvRepoDetails)
     TextView tvRepoDetails;
-    @Bind(R.id.tvUserName)
+    @BindView(R.id.tvUserName)
     TextView tvUserName;
 
     @Inject

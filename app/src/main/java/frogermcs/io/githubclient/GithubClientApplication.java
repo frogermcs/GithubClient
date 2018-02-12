@@ -5,8 +5,6 @@ import android.content.Context;
 
 import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 
-import java.util.concurrent.Executors;
-
 import frogermcs.io.githubclient.data.UserComponent;
 import frogermcs.io.githubclient.data.api.UserModule;
 import timber.log.Timber;
@@ -42,7 +40,6 @@ public class GithubClientApplication extends Application {
 
 
         appProductionComponent = DaggerAppProductionComponent.builder()
-                .executor(Executors.newSingleThreadExecutor())
                 .appComponent(appComponent)
                 .build();
     }

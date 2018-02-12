@@ -11,7 +11,10 @@ import frogermcs.io.githubclient.data.api.UserModule;
  */
 @ProductionComponent(
         dependencies = AppComponent.class,
-        modules = GithubApiProducerModule.class
+        modules = {
+                GithubApiProducerModule.class,
+                ExecutorModule.class
+        }
 )
 public interface AppProductionComponent {
     ListenableFuture<UserManager> userManager();
