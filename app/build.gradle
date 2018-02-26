@@ -65,4 +65,5 @@ dependencies {
     androidTestImplementation "com.google.dexmaker:dexmaker:1.2"
     androidTestImplementation "com.google.dexmaker:dexmaker-mockito:1.2"
     testImplementation 'junit:junit:4.12'
+    testAnnotationProcessor "com.google.auto.factory:auto-factory:1.0-beta3"
 }
