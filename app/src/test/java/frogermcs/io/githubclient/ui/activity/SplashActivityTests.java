@@ -1,7 +1,5 @@
 package frogermcs.io.githubclient.ui.activity;
 
-import android.support.annotation.NonNull;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,16 +8,13 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import frogermcs.io.githubclient.BuildConfig;
-import frogermcs.io.githubclient.MockAppModule;
 import frogermcs.io.githubclient.TestGithubClientApplication;
 import frogermcs.io.githubclient.ui.activity.component.SplashActivityComponent;
-import frogermcs.io.githubclient.ui.activity.module.MockSplashActivityModule;
-import frogermcs.io.githubclient.ui.activity.module.SplashActivityModule;
 import frogermcs.io.githubclient.utils.AnalyticsManager;
 
 import static org.mockito.Matchers.any;
@@ -30,7 +25,7 @@ import static org.mockito.Mockito.verify;
 /**
  * Created by Miroslaw Stanek on 19.09.15.
  */
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(
         sdk = 18,
         constants = BuildConfig.class,
