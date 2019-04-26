@@ -2,14 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.frogermcs.androiddevmetrics'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "frogermcs.io.githubclient"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -28,9 +27,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-compat:26.1.0'
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:support-compat:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 
     //Dagger 2
     implementation 'com.google.dagger:dagger:2.14.1'
@@ -56,7 +55,8 @@ dependencies {
 
     testImplementation "org.robolectric:robolectric:3.1.2"
     testImplementation "org.mockito:mockito-core:1.10.19"
-
+    testImplementation 'junit:junit:4.12'
+    
     androidTestImplementation 'com.android.support:support-annotations:25.0.0'
     androidTestImplementation 'com.squareup:javawriter:2.5.1'
 
@@ -67,6 +67,5 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:1.10.19"
     androidTestImplementation "com.google.dexmaker:dexmaker:1.2"
     androidTestImplementation "com.google.dexmaker:dexmaker-mockito:1.2"
-    testImplementation 'junit:junit:4.12'
     testAnnotationProcessor "com.google.auto.factory:auto-factory:1.0-beta3"
 }

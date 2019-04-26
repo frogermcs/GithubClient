@@ -4,8 +4,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.6'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.7'
     }
 }
 
