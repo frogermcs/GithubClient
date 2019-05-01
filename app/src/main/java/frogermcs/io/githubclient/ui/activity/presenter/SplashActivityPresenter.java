@@ -18,6 +18,7 @@ public class SplashActivityPresenter {
     private UserManager userManager;
     private HeavyLibraryWrapper heavyLibraryWrapper;
 
+    @Inject
     public SplashActivityPresenter(SplashActivity splashActivity, Validator validator,
                                    UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
         this.splashActivity = splashActivity;
