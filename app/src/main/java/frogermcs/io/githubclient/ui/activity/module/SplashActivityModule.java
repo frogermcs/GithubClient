@@ -26,11 +26,4 @@ public class SplashActivityModule {
     SplashActivity provideSplashActivity() {
         return splashActivity;
     }
-
-    @Provides
-    @ActivityScope
-    SplashActivityPresenter
-    provideSplashActivityPresenter(Validator validator, UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
-        return new SplashActivityPresenter(splashActivity, validator, userManager, heavyLibraryWrapper);
-    }
 }
